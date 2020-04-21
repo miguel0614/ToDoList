@@ -16,11 +16,12 @@ function createList() {
                 "            </ul>\n" +
                 "            <div id='" + numOfLists + "-drop'  class=\"dropdown-content\">\n" +
                 "            <a onclick='removeList(" + numOfLists + ")' \">Delete</a>\n" +
+                "            <a onclick=\"renameList('" + numOfLists + "-title')\">Rename</a>\n" +
                 "            </div>\n" +
                 "            </div>\n" +
                 "                        <div class=\"card px-3\"> \n" +
                 "                            <div class=\"card-body\"> \n" +
-                "                                <h2 class=\"card-title\">" + content + "</h2>\n" +
+                "                                <h2 class=\"card-title\" id='" + numOfLists + "-title'>" + content + "</h2>\n" +
                 "                                <div class=\"add-items d-flex\">\n" +
                 "                                    <input type=\"text\" onkeypress=\"newItem('" + numOfLists + "-add')\" class=\"form-control todo-list-input\" id='" + numOfLists + "-input' placeholder=\"New Item.\">\n" +
                 "                                    <button class=\"add btn btn-primary font-weight-bold todo-list-add-btn\" id='" + numOfLists + "-add'>Add</button>\n" +
@@ -79,7 +80,41 @@ function showDropdown(id) {
 }
 
 function removeList(id) {
-    document.getElementById(id).remove()
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.value) {
+            document.getElementById(id).remove()
+            Swal.fire(
+                'Deleted!',
+                'Your To-Do List has been deleted.',
+                'success'
+            )
+        }
+    })
+}
+
+function renameList(id) {
+    Swal.fire({
+        title: 'Enter New List Title',
+        input: 'text',
+        showCancelButton: true,
+        inputValidator: (value) => {
+            if (!value) {
+                return 'You need to write something!'
+            }
+        }
+    }).then((result) => {
+        if (result.value) {
+            document.getElementById(id).innerText = result.value;
+        }
+    })
 }
 
 window.onclick = function(event) {
