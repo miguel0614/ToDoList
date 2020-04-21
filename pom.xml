@@ -1,4 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0">
+    <groupId>Miguel-Bautista</groupId>
     <artifactId>OpenEndedProject</artifactId>
     <modelVersion>4.0.0</modelVersion>
     <url>http://maven.apache.org</url>
