@@ -5,7 +5,13 @@
  - Ability to create multiple todo lists
  - Allow for renaming and deletion of todo lists
  - Multi-Threaded Server support 
+
+ ## [1.0.1] 04-22-2020
+ ### Added:
+- Added Register/Returning User Option
+
  
+  
  ## Upcoming Features:
  ###
  - Persist Data in SQL Database

@@ -1,4 +1,26 @@
 const client = io.connect("http://localhost:8080", {transports: ["websocket"]});
+let newUser = true
+
+client.on("login", function (event) {
+    Swal.fire({
+        title: 'Welcome!',
+        text: "Are you a new or returning user?",
+        showCancelButton: true,
+        cancelButtonText: 'Login',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: ' Register'
+    }).then((result) => {
+        if (result.value) {
+            login()
+        }
+        else {
+            newUser = false
+            login()
+        }
+    })
+})
+
 
 client.on("success", function(event){
     document.getElementById("login").remove()
@@ -23,13 +45,18 @@ client.on("success", function(event){
 });
 
 client.on("failure", function(event){
-login()
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Incorrect Login Information / Username Taken!',
+    }).then(login)
     });
 
 async function login() {
     const { value: username } =  await Swal.fire({
         title: 'Input username',
         input: 'text',
+        allowOutsideClick: false,
         inputPlaceholder: 'Enter your username'
     })
 
@@ -38,18 +65,18 @@ async function login() {
         input: 'password',
         inputPlaceholder: 'Enter your password',
         inputAttributes: {
-            maxlength: 10,
+            maxlength: 25,
             autocapitalize: 'off',
+            allowOutsideClick: false,
             autocorrect: 'off'
         }
     })
-    sendLogin(username, password)
+    sendLogin(username, password, newUser)
 }
 
 function sendLogin(username, password) {
     hashCode = s => s.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0); return a&a},0)
-    client.emit("login", JSON.stringify({user: username, pass: String(hashCode(password))
-    }))}
+    client.emit("login", JSON.stringify({user: username, pass: String(hashCode(password)), newUser: newUser}))}
 
 function emitCreateList(listName, listNumber){
     client.emit("createList", JSON.stringify({listName: listName, listNumber: listNumber}));

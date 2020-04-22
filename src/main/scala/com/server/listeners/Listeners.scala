@@ -19,7 +19,7 @@ class CompleteItemListener(server: ToDoServer) extends DataListener[String] {
 class ConnectionListener() extends ConnectListener() {
   override def onConnect(client: SocketIOClient): Unit = {
     println("New Connection: " + client)
-    client.sendEvent("failure")
+    client.sendEvent("login")
   }
 }
 
@@ -52,13 +52,11 @@ class DisconnectionListener extends DisconnectListener{
 class LoginListener(server: ToDoServer) extends DataListener[String]{
   override def onData(client: SocketIOClient, data: String, ackSender: AckRequest): Unit = {
     val parsed: JsValue = Json.parse(data)
-    val username: String = parsed("user").as[String]
+    val username: String = parsed("user").as[String].toLowerCase()
     val password: String = parsed("pass").as[String]
-
-    if (server.registeredUser.contains(username)) {
-      if (server.registeredUser(username) == password) client.sendEvent("success")
-      else client.sendEvent("failure")
-    }
+    val newUser: Boolean = parsed("newUser").as[Boolean]
+    if (newUser){
+    if (server.registeredUser.contains(username)) client.sendEvent("failure")
     else {
       val newUserActor: ActorRef = server.userActors.actorOf(Props(classOf[UserActor], server, username))
       server.registeredUser += (username -> password)
@@ -66,6 +64,14 @@ class LoginListener(server: ToDoServer) extends DataListener[String]{
       server.socketToActor += (client -> newUserActor)
       client.sendEvent("success")
       println("New User Registered: " + username)
+      }
+    }
+    else {
+      if (server.registeredUser.contains(username)) {
+        if (server.registeredUser(username) == password) client.sendEvent("success")
+        else client.sendEvent("failure")
+      }
+      else client.sendEvent("failure")
     }
   }
 }
