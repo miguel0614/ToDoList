@@ -7,6 +7,7 @@ client.on("login", function (event) {
         text: "Are you a new or returning user?",
         showCancelButton: true,
         cancelButtonText: 'Login',
+        allowOutsideClick: false,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#3085d6',
         confirmButtonText: ' Register'

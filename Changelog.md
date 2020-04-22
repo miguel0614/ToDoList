@@ -10,7 +10,9 @@
  ### Added:
 - Added Register/Returning User Option
 
- 
+## [1.0.2] 04-22-2020
+### Added:
+- Block Outside Click During Registration
   
  ## Upcoming Features:
  ###
