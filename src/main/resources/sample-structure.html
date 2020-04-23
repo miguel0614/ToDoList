@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>To-Do List</title>
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="client.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body id="body" class="swal2-shown swal2-height-auto">
+<div class="padding" align="center">
+    <div class="row container d-flex justify-content-center">
+        <div class="col-lg-12">
+            <div class="add-items d-flex">
+                <input type="text" id="create-list-input" class="form-control todo-list-create" placeholder="Create a new list.">
+                <button class="add btn btn-primary font-weight-bold todo-list-create-btn" id="create-list">Create</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="page-content page-container" id="page-content">
+        <div class="padding" id="0">
+            <div class="row container d-flex justify-content-center">
+                <div class="col-lg-12">
+                    <div class="dropdown">
+                        <ul class="dropbtn icons  showLeft" onclick="showDropdown('0-drop')">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        <div id="0-drop" class="dropdown-content">
+                            <a onclick="removeList(0)">Delete</a>
+                            <a onclick="renameList('0-title')">Rename</a>
+                        </div>
+                    </div>
+                    <div class="card px-3">
+                        <div class="card-body">
+                            <h2 class="card-title" id="0-title">Homework:</h2>
+                            <div class="add-items d-flex">
+                                <input type="text" onkeypress="newItem('0-add')" class="form-control todo-list-input" id="0-input" placeholder="New Item.">
+                                <button class="add btn btn-primary font-weight-bold todo-list-add-btn" id="0-add">Add</button>
+                            </div>
+                            <div class="list-wrapper">
+                                <ul class="d-flex flex-column-reverse todo-list" id="0-list">
+                                    <li>
+                                        <div class="form-check">
+                                            <label class="form-check-label" id="cher">
+                                                <input class="checkbox" type="checkbox" id="CSE 191: Homework 6 05/01/2020" checked="checked"> CSE 191: Homework 6 05/01/2020
+                                                <i class="input-helper"></i>
+                                            </label>
+                                        </div>
+                                        <i class="remove mdi mdi-close-circle-outline"></i>
+                                    </li>
+                                    <li class="completed">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="checkbox" type="checkbox" id="MTH 309: Test 8 AM 04/23/2020" >CSE 191: Homework 6 05/01/2020
+                                                <i class="input-helper"></i>
+                                            </label>
+                                        </div>
+                                        <i class="remove mdi mdi-close-circle-outline"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+</body>
+</html>

@@ -27,6 +27,11 @@
 ### Added:
  - Allow Only One Instance of a User
 
+## [1.2.1] 04-23-2020
+### Added:
+ - Rewrote Front-End code, All Data Now Handled on Server.
+ - Reloads To-Do Lists on Retuning User Login 
+
  ## Deprecated Features:
  ###
  - Allow Only One Instance of a User
@@ -35,5 +40,4 @@
  ###
  - Host Web Server in a Dedicated Domain
  - Improved Login Authentication
- - Reload Saved User To-Do Lists on Login
  - Allow Multiple Instances of User
