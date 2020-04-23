@@ -53,6 +53,15 @@ client.on("failure", function(event){
     }).then(login)
     });
 
+client.on("failureLoggedIn", function(event){
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'You Are Logged in on Another Device!',
+    }).then(login)
+});
+
+
 async function login() {
     const { value: username } =  await Swal.fire({
         title: 'Input username',

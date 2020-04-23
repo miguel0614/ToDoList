@@ -23,10 +23,17 @@
 - Persist Server Data in MySQL
 - Separate Server Actor to Update Database
 
+## [1.1.1] 04-23-2020
+### Added:
+ - Allow Only One Instance of a User
+
+ ## Deprecated Features:
+ ###
+ - Allow Only One Instance of a User
 
  ## Upcoming Features:
  ###
  - Host Web Server in a Dedicated Domain
  - Improved Login Authentication
  - Reload Saved User To-Do Lists on Login
- - Allow Only One Instance of a User
+ - Allow Multiple Instances of User
