@@ -1,6 +1,5 @@
 const client = io.connect("http://localhost:8080", {transports: ["websocket"]});
 let newUser = true
-let todoLists
 
 client.on("login", function (event) {
     Swal.fire({
@@ -35,14 +34,6 @@ client.on("failure", function(event){
         text: 'Incorrect Login Information / Username Taken!',
     }).then(login)
     });
-
-client.on("failureLoggedIn", function(event){
-    Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'You Are Logged in on Another Device!',
-    }).then(login)
-});
 
 
 async function login() {
@@ -156,7 +147,6 @@ function constructList(todoLists) {
         const listNumber = pair[0]
         const listName = pair[1][0]
         const items = pair[1][1]
-        console.log(items)
         let itemBody = ""
 
         for (let i = 0; i < items.length; i++) {

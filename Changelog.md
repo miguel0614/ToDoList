@@ -32,12 +32,12 @@
  - Rewrote Front-End code, All Data Now Handled on Server.
  - Reloads To-Do Lists on Retuning User Login 
 
- ## Deprecated Features:
- ###
- - Allow Only One Instance of a User
+## [1.2.2] 04-24-2020
+### Added:
+ - Allow Multiple Instances of User
+
 
  ## Upcoming Features:
  ###
  - Host Web Server in a Dedicated Domain
  - Improved Login Authentication
- - Allow Multiple Instances of User
