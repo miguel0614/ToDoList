@@ -67,7 +67,7 @@ function sendLogin(username, password) {
     client.emit("login", JSON.stringify({user: username, pass: String(hashCode(password)), newUser: newUser}))}
 
 function emitCreateList(listName, listNumber){
-    client.emit("createList", JSON.stringify({listName: listName, listNumber: listNumber}));
+    client.emit("createList", JSON.stringify({listName: listName.replace(/'/g,""), listNumber: listNumber}));
 }
 
 
@@ -82,8 +82,8 @@ function emitRenameList(listNumber, newName){
 
 
 function emitAddItem(listNumber, value){
-    console.log(value)
-    client.emit("addItem", JSON.stringify({listNumber: listNumber, value: value}));
+
+    client.emit("addItem", JSON.stringify({listNumber: listNumber, value: value.replace(/'/g,"")}));
 }
 
 function emitDeleteItem(listNumber, value){
@@ -153,7 +153,7 @@ function constructList(todoLists) {
             itemBody += ` <li ${isComplete(items[i][1])}>
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input class="checkbox" type="checkbox" id="${i}-check" onclick="checkItem(${numOfLists}, '${items[i][0]}')" ${isChecked(items[i][1])}> ${items[i][0]}
+                        <input class="checkbox" type="checkbox" id="${i}-check" onclick="checkItem(${numOfLists}, '${(items[i][0])}' )" ${isChecked(items[i][1])}> ${items[i][0]}
                         <i class="input-helper"></i>
                     </label>
                 </div>
@@ -207,7 +207,8 @@ function enterNewList(event, listNumber) {
 function newList(listNumber) {
     const listName = document.getElementById("create-list-input").value
     if (listName.length > 0) {
-    emitCreateList(listName, listNumber)
+        emitCreateList(listName, listNumber)
+        document.getElementById("create-list-input").value = ""
 }
 }
 
