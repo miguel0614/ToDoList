@@ -85,9 +85,19 @@ class LoginListener(server: ToDoServer) extends DataListener[String]{
     else {
       if (server.registeredUser.contains(username)) {
         if (server.registeredUser(username) == password) {
-          val newUserActor: ActorRef = server.userActors.actorOf(Props(classOf[UserActor], username, server.self, server.userData(username)))
-          updateUser(client, username, newUserActor)
-          client.sendEvent("success", Json.stringify(Json.toJson(server.userData(username))))
+          if (server.userData.contains(username)) {
+            val newUserActor: ActorRef = server.userActors.actorOf(Props(classOf[UserActor], username, server.self, server.userData(username)))
+            updateUser(client, username, newUserActor)
+            client.sendEvent("success", Json.stringify(Json.toJson(server.userData(username))))
+          }
+          else {
+            val newUserActor: ActorRef = server.userActors.actorOf(Props(classOf[UserActor], username, server.self, Map()))
+            updateUser(client, username, newUserActor)
+            client.sendEvent("success")
+
+          }
+
+
         }
         else client.sendEvent("failure")
       }

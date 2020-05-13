@@ -80,7 +80,6 @@ class ToDoServer extends Actor {
         for (actor <- userToActor(key)) actor ! Update(data.userInfo)
         for (socket <- userToSocket(key)) socket.sendEvent("update", Json.stringify(Json.toJson(value)))
         connection.createStatement().execute("CREATE TABLE IF NOT EXISTS todolists (username TEXT, todolist TEXT)")
-        connection.createStatement().execute("TRUNCATE TABLE todolists")
         val updateStatement: PreparedStatement = connection.prepareStatement("REPLACE INTO todolists VALUE (?,?)")
         updateStatement.setString(1,key)
         updateStatement.setString(2,Json.stringify(Json.toJson(value)))

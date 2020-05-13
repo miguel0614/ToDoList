@@ -190,7 +190,8 @@ function constructList(todoLists) {
                             </div>
                         </div>
                     </div>
-                </div> `
+                </div> 
+        </div>`
         numOfLists ++
     }
     document.getElementById("page-content").innerHTML = pageBody

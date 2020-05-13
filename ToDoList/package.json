@@ -1,9 +1,0 @@
-{
-  "name": "ToDoList",
-  "version": "1.0.0",
-  "dependencies": {},
-  "devDependencies": {
-    "sweetalert": "^2.1.2",
-    "sweetalert2": "^9.10.12"
-  }
-}
